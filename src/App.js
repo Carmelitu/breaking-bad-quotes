@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import Frase from './components/Frase';
 
@@ -11,13 +11,19 @@ const Contenedor = styled.div`
 
 const Boton = styled.button`
   background: -webkit-linear-gradient(top left, #007D35 0%, #007D35 40%, #0F574E 100%);
-  background-size: 300px;
+  background-size: 400px;
   font-family: Arial, Helvetica, sans-serif;
   color: #FFF;
   margin-top: 3rem;
   padding: 1rem 3rem;
   font-size: 2rem;
   border: 3px solid black;
+  transition: background-size .8s ease;
+
+  :hover{
+    cursor: pointer;
+    background-size: 500px;
+  }
 `;
 
 
@@ -31,6 +37,11 @@ function App() {
     const frase = await api.json();
     setFrase(frase[0]);
   }
+
+  // Cargar Frase
+  useEffect(() => {
+    consultarAPI();
+  }, [])
 
   return (
     <Contenedor>
